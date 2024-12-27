@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetVcare - Professional Dog Sitting Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4a90e2;
+            --secondary: #48bb78;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 1rem;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.training.com.au/wp-content/uploads/Animal-Care-2.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background: white;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Pricing Calculator */
+        .pricing {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 6rem 2rem;
+        }
+
+        .pricing-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-slots {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .time-slot {
+            padding: 0.8rem 1.5rem;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .time-slot:hover {
+            background: #cbd5e0;
+        }
+
+        .time-slot.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .duration-slider {
+            margin: 2rem 0;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .price-display {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 1rem 0;
+        }
+
+        /* Booking Form */
+        .booking {
+            padding: 6rem 2rem;
+            background-color: var(--light);
+        }
+
+        .booking-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .booking-summary {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            max-width: 800px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cta-button {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .time-slots {
+                flex-direction: column;
+            }
+
+            .time-slot {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">PetVCare</div>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#booking">Book Now</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Professional Pet Care Services</h1>
+            <p>Your furry friends deserves the best care while you're away</p>
+            <button class="cta-button" onclick="location.href='#pricing'">Check Pricing</button>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Day Care</h3>
+                <p>Perfect for when you're at work or busy during the day. Includes walks, playtime, and lots of
+                    attention.</p>
+            </div>
+            <div class="service-card">
+                <h3>Overnight Stay</h3>
+                <p>24/7 care in our sitter's loving home environment. Your pet will feel like part of the family.</p>
+            </div>
+            <div class="service-card">
+                <h3>Walking Service</h3>
+                <p>Regular exercise and outdoor playtime included. Tailored to your pet's energy level and needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="pricing-container">
+            <h2 class="section-title">Calculate Your Price</h2>
+            <div class="time-selector">
+                <h3>Select Time Slot</h3>
+                <div class="time-slots">
+                    <button class="time-slot active" data-rate="99">Morning (6AM-12PM)</button>
+                    <button class="time-slot" data-rate="199">Afternoon (12PM-6PM)</button>
+                    <button class="time-slot" data-rate="299">Evening (6PM-10PM)</button>
+                    <button class="time-slot" data-rate="399">Overnight (10PM-6AM)</button>
+                </div>
+            </div>
+
+            <div class="duration-slider">
+                <h3>Duration (hours)</h3>
+                <div class="slider-container">
+                    <input type="range" id="duration" min="1" max="24" value="4" step="1">
+                </div>
+                <div class="time-display">
+                    Selected duration: <span id="duration-value">4</span> hours
+                </div>
+            </div>
+
+            <div class="price-display">
+                <h3>Total Price</h3>
+                <div class="price">₹<span id="total-price">60</span></div>
+                <div>Rate: ₹<span id="hourly-rate">99</span>/hour</div>
+            </div>
+
+            <button class="cta-button" onclick="location.href='#booking'" style="width: 100%; margin-top: 2rem;">
+                Book Now
+            </button>
+        </div>
+    </section>
+
+    <section id="booking" class="booking">
+        <div class="booking-form">
+            <h2 class="section-title">Book Your Service</h2>
+            <form id="dogBookingForm">
+                <div class="form-group">
+                    <label for="ownerName">Your Name</label>
+                    <input type="text" id="ownerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="dogName">Pet's Name</label>
+                    <input type="text" id="dogName" required>
+                </div>
+                <div class="form-group">
+                    <label for="dogBreed">Pet's Breed</label>
+                    <input type="text" id="dogBreed" required>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Special Requirements</label>
+                    <textarea id="notes" rows="4"></textarea>
+                </div>
+
+                <div class="booking-summary">
+                    <h3>Booking Summary</h3>
+                    <p>Selected Time Slot: <span id="summary-time-slot">Morning (6AM-12PM)</span></p>
+                    <p>Duration: <span id="summary-duration">4</span> hours</p>
+                    <p>Total Price: ₹<span id="summary-price">60</span></p>
+                </div>
+
+                <button type="submit" class="cta-button" style="width: 100%; margin-top: 2rem;">
+                    Confirm Booking
+                </button>
+            </form>
+        </div>
+    </section>
+    <!-- Previous HTML remains the same until the closing sections -->
+    <section id="faq" class="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-item">
+            
+            <div class="faq-answer">All dogs must be up-to-date with their core vaccinations including Rabies, DHPP, and
+                Bordetella. Please bring vaccination records during your first visit.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What items should I bring for my Pet's stay?</div>
+            <div class="faq-answer">Please bring your dog's food, favorite toys, bed or blanket, any medications, and
+                detailed care instructions.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What happens in case of emergency?</div>
+            <div class="faq-answer">We have partnerships with local veterinary clinics and maintain 24/7 emergency
+                contact
+                protocols. Your dog's safety is our top priority.</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 PetVCare. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Get all required elements
+        const timeSlots = document.querySelectorAll('.time-slot');
+        const durationSlider = document.getElementById('duration');
+        const durationValue = document.getElementById('duration-value');
+        const totalPrice = document.getElementById('total-price');
+        const hourlyRate = document.getElementById('hourly-rate');
+        const summaryTimeSlot = document.getElementById('summary-time-slot');
+        const summaryDuration = document.getElementById('summary-duration');
+        const summaryPrice = document.getElementById('summary-price');
+
+        // Initialize variables
+        let currentRate = 99; // Default rate (Morning slot)
+
+        // Handle time slot selection
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', () => {
+                // Remove active class from all slots
+                timeSlots.forEach(s => s.classList.remove('active'));
+
+                // Add active class to clicked slot
+                slot.classList.add('active');
+
+                // Update rate
+                currentRate = parseFloat(slot.dataset.rate);
+                hourlyRate.textContent = currentRate;
+
+                // Update summary time slot
+                summaryTimeSlot.textContent = slot.textContent;
+
+                // Recalculate total price
+                calculatePrice();
+            });
+        });
+
+        // Handle duration slider
+        durationSlider.addEventListener('input', (e) => {
+            const hours = parseInt(e.target.value);
+            durationValue.textContent = hours;
+            summaryDuration.textContent = hours;
+            calculatePrice();
+        });
+
+        // Calculate and update price
+        function calculatePrice() {
+            const hours = parseInt(durationSlider.value);
+            const price = hours * currentRate;
+            totalPrice.textContent = price;
+            summaryPrice.textContent = price;
+        }
+
+        // Initialize FAQ accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Toggle active class
+                item.classList.toggle('active');
+            });
+        });
+
+        // Form submission handling
+        const bookingForm = document.getElementById('dogBookingForm');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // You can add form submission logic here
+            alert('Booking submitted successfully! We will contact you soon.');
+            bookingForm.reset();
+        });
+
+        // Initialize the page with default calculations
+        calculatePrice();
+    </script>
+</body>
+
+</html>
